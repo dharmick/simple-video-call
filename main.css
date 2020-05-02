@@ -1,0 +1,118 @@
+* {
+	box-sizing: border-box;
+}
+
+.mdc-text-field {
+	padding: 0;
+}
+
+body {
+	color: rgba(0, 0, 0, 0.87);
+	font-family: Roboto, Helvetica, Arial, sans-serif;
+	margin: 0;
+	padding: 0;
+}
+
+button {
+	margin: 5px;
+}
+
+/* remote videos */
+
+.in-call div#videos {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+}
+
+div#videos {
+	display: none;
+}
+
+div#videos > video {
+	background: black;
+	width: 100%;
+	height: 100vh;
+	display: block;
+	transform: rotateY(180deg);
+	-webkit-transform: rotateY(180deg); /* Safari and Chrome */
+	-moz-transform: rotateY(180deg); /* Firefox */
+}
+
+/* local video */
+
+#local-video-wrapper {
+	display: flex;
+}
+
+#localVideo {
+	height: 100vh;
+	width: 100%;
+	background: black;
+	transform: rotateY(180deg);
+	-webkit-transform: rotateY(180deg); /* Safari and Chrome */
+	-moz-transform: rotateY(180deg); /* Firefox */
+	z-index: 2;
+}
+
+.in-call #localVideo {
+	width: 200px;
+	height: auto;
+	position: absolute;
+	top: 20px;
+	right: 20px;
+}
+
+/* buttons wrapper before call */
+
+.in-call #buttons {
+	display: none;
+}
+
+#buttons {
+	z-index: 3;
+	width: 254px;
+	position: absolute;
+	border: 2px solid var(--mdc-theme-primary);
+	padding: 20px;
+	border-radius: 4px;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	background: white;
+}
+
+#buttons button {
+	width: 200px;
+}
+
+/* hangup button */
+#hangupBtn {
+	display: none;
+}
+
+.in-call #hangupBtn {
+	display: block;
+	position: absolute;
+	bottom: 50px;
+	left: 50%;
+	transform: translateX(-50%);
+	z-index: 3;
+}
+
+/* current room text */
+#currentRoom {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	color: red;
+	z-index: 3;
+}
+
+/* mobile devices */
+
+@media (max-width: 768px) {
+	.in-call #localVideo {
+		width: 100px;
+	}
+}
