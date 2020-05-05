@@ -25,7 +25,6 @@ async function init() {
   await openUserMedia();
   document.querySelector('#hangupBtn').addEventListener('click', await hangUp);
   document.querySelector('#createBtn').addEventListener('click', createRoom);
-  // document.querySelector('#joinBtn').addEventListener('click', joinRoom);
 
   var url = new URL(window.location.href);
   var roomParam = url.searchParams.get("room");
@@ -68,6 +67,8 @@ async function createRoom() {
 
 
 async function joinRoomById(roomId) {
+  document.querySelector('#createBtn').disabled = true;
+
 
   const db = firebase.firestore();
   roomRef = db.collection('rooms').doc(`${roomId}`);
@@ -79,8 +80,7 @@ async function joinRoomById(roomId) {
 
     await roomRef.update({ 'nextUserId': userId + 1 })
 
-    document.querySelector('#createBtn').disabled = true;
-    document.querySelector('body').classList.add('in-call')
+    document.querySelector('body').classList.add('in-call');
     document.querySelector(
       '#currentRoom').innerText = `Current room: ${roomId}`;
 
@@ -103,7 +103,19 @@ async function openUserMedia(e) {
   let stream;
   try {
     stream = await navigator.mediaDevices.getUserMedia(
-      { video: true, audio: true });
+      {
+        video: {
+          width: 360,
+          height: 240,
+          aspectRatio: 1.5,
+          frameRate: 25
+        },
+        audio: {
+          sampleSize: 16,
+          channelCount: 2,
+          echoCancellation: true
+        }
+      });
     document.querySelector('#createBtn').disabled = false;
   } catch (e) {
     console.log(e)
